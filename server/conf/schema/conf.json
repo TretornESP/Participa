@@ -1,0 +1,29 @@
+{
+    "$id": "https://participa.tretornesp.com/server/conf.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Master configuration file",
+    "type": "object",
+    "properties": {
+      "$schema": {
+        "type": "string",
+        "description": "The schema for this file"
+      },
+      "version": {
+        "type": "string",
+        "description": "The version for this program"
+      },
+      "api_root": {
+        "type": "string",
+        "description": "The root for the API"
+      },
+      "cors": {
+        "type": "boolean",
+        "description": "Enable CORS"
+      }
+    },
+    "required": [
+      "api_root",
+      "cors"
+    ],
+    "additionalProperties": true
+  }

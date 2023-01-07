@@ -1,0 +1,8 @@
+conf/*
+!conf/schema/
+!conf/.gitkeep
+__pycache__
+*.log
+*.pyc
+*.pyo
+*.pyd

@@ -1,0 +1,32 @@
+version: "3.9"
+services:
+  server:
+    container_name: server
+    build: ./server
+    restart: "always"
+    volumes:
+      - ./server/app:/server/app
+      - ./server/conf:/server/conf
+    expose:
+      - "5000"
+    networks:
+      - backend
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    restart: always
+    depends_on:
+      - server
+    ports:
+      - "443:443"
+      - "80:80"
+    networks:
+      - frontend
+      - backend
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
