@@ -46,3 +46,12 @@ status:
 pull:
 	@git pull origin $(TARGET_BRANCH)
 	@make build
+
+folders:
+	@sudo mkdir $(DATA_FOLDER)/server
+	@sudo mkdir $(DATA_FOLDER)/trashcan
+
+deploy:
+	@make pull
+	@make folders
+	@make rebuild
