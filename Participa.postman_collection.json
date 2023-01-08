@@ -1,0 +1,203 @@
+{
+	"info": {
+		"_postman_id": "4ca94c0a-0f0d-452c-8757-132ad594d405",
+		"name": "Participa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18121227"
+	},
+	"item": [
+		{
+			"name": "security",
+			"item": [
+				{
+					"name": "Validate token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "Va",
+							"host": [
+								"Va"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"xabi@xabi.es\",\r\n    \"password\": \"patatoska\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost/security/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"security",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3MzE4ODQ0MSwianRpIjoiOTA1YzJjYmYtNDA2OC00MmYzLTkzYzItNGFkMWY5ODhlYzY5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InhhYmlAeGFiaS5lcyIsIm5iZiI6MTY3MzE4ODQ0MSwiZXhwIjoxNjczMTkyMDQxfQ.XKg6QioTsObvu9R2eqMadi1ZKwo1EzNf3_gKea9jQYI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost/security/logout",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"security",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3MzE4ODQ0MSwianRpIjoiNGVkYmYzZGQtMjkzOC00NTc4LWFlMzYtMGE5OGFkOGI1NjViIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJ4YWJpQHhhYmkuZXMiLCJuYmYiOjE2NzMxODg0NDEsImV4cCI6MTY3NTc4MDQ0MX0.v0_wT7ebnR1mlR9dfN878FtTnNBdEL8I6v7zsTggmCw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost/security/refreshToken",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"security",
+								"refreshToken"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost/user/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost/user/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "proposal",
+			"item": [
+				{
+					"name": "list",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
