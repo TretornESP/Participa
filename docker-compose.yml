@@ -9,8 +9,25 @@ services:
       - ./server/conf:/server/conf
     expose:
       - "5000"
+    depends_on:
+      - mongo
     networks:
       - backend
+      - database
+
+  trashcan:
+    container_name: trashcan
+    image: redis:6.2-alpine
+    restart: always
+    command: /bin/sh -c "redis-server --appendonly yes --requirepass $$REDIS_PASSWORD"
+    env_file:
+      - ./trashcan/credentials.env
+    networks:
+      - database
+    expose:
+      - "6379"
+    volumes:
+      - trashcanvol:/data
 
   nginx:
     container_name: nginx
@@ -27,12 +44,15 @@ services:
 
   mongo:
     container_name: mongo
-    image: mongo:latest
+    image: mongo:4.2.23
     restart: always
+    env_file:
+      - ./mongo/credentials.env
     expose:
       - "27017"
     volumes:
-      - ./mongo:/data/db
+      - mongovol:/data/db
+      - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
     networks:
       - database
 
@@ -43,3 +63,17 @@ networks:
     driver: bridge
   database:
     driver: bridge
+
+volumes:
+  mongovol:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/participastorage'
+      o: bind
+  trashcanvol:
+    driver: local
+    driver_opts:
+      type: none
+      device: '/trashcanstorage'
+      o: bind

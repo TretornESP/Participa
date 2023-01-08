@@ -1,5 +1,8 @@
+from datetime import timedelta
+
 from flask import Flask
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 from app.config import Config
 from app.controller.route_master import RouteMaster
 
@@ -20,6 +23,11 @@ def project_init():
 
     try:
         app.config["APPLICATION_ROOT"] = conf['api_root']
+        app.config["JWT_SECRET_KEY"] = conf['secret_key']
+        app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=conf['access_token_expiration'])
+        app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=conf['refresh_token_expiration'])
+        app.jwt = JWTManager(app)
+        
         with app.app_context():
             app.log.info("[INIT] Registering routes...")
             resources = {}

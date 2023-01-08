@@ -3,7 +3,7 @@ import inspect
 import os
 from importlib import import_module
 
-from flask import Blueprint
+from flask import Blueprint, jsonify
 ROUTES = {}
 
 class RouteMaster:
@@ -48,3 +48,15 @@ class RouteMaster:
     @staticmethod
     def get_all_blueprints():
         return [ROUTES[route]["bp"] for route in ROUTES]
+
+    @staticmethod
+    def ok_response(message):
+        return jsonify(message), 200
+    
+    @staticmethod
+    def error_response(message):
+        return jsonify(message), 400
+
+    @staticmethod
+    def auth_required_response(message):
+        return jsonify(message), 401

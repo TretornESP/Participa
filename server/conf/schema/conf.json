@@ -16,6 +16,34 @@
         "type": "string",
         "description": "The root for the API"
       },
+      "secret_key": {
+        "type": "string",
+        "description": "The secret key for the API"
+      },
+      "access_token_expiration": {
+        "type": "integer",
+        "description": "The expiration time for the access token in hours"
+      },
+      "refresh_token_expiration": {
+        "type": "integer",
+        "description": "The expiration time for the refresh token in days"
+      },
+      "trashcan_hostname": {
+        "type": "string",
+        "description": "The hostname for the trashcan"
+      }, 
+      "trashcan_port": {
+        "type": "integer",
+        "description": "The port for the trashcan"
+      }, 
+      "trashcan_password": {
+        "type": "string",
+        "description": "The password for the trashcan"
+      },
+      "trashcan_db": {
+        "type": "integer",
+        "description": "The database for the trashcan"
+      },
       "cors": {
         "type": "boolean",
         "description": "Enable CORS"
@@ -23,6 +51,13 @@
     },
     "required": [
       "api_root",
+      "secret_key",
+      "access_token_expiration",
+      "refresh_token_expiration",
+      "trashcan_hostname",
+      "trashcan_port",
+      "trashcan_password",
+      "trashcan_db",
       "cors"
     ],
     "additionalProperties": true

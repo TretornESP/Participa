@@ -1,0 +1,30 @@
+{
+    "$id": "https://participa.tretornesp.com/server/mongo.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Mongodb configuration file",
+    "type": "object",
+    "properties": {
+      "$schema": {
+        "type": "string",
+        "description": "The schema for this file"
+      },
+      "connstring": {
+        "type": "string",
+        "description": "Connection string"
+      },
+      "database": {
+        "type": "string",
+        "description": "The name of the database"
+      },
+      "user_collection": {
+        "type": "string",
+        "description": "The name of the user collection"
+      }
+    },
+    "required": [
+      "connstring",
+      "database",
+      "user_collection"
+    ],
+    "additionalProperties": true
+  }
