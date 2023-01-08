@@ -22,6 +22,7 @@ class RouteMaster:
         mod = inspect.getmodule(frm[0])
 
         ROUTES[route] = {"name": route, "folder": mod.__name__, "origins": origins, "bp": Blueprint(route, mod.__name__, url_prefix='/'+route)}
+        
         return ROUTES[route]["bp"]
 
     @staticmethod
@@ -60,3 +61,11 @@ class RouteMaster:
     @staticmethod
     def auth_required_response(message):
         return jsonify(message), 401
+
+    @staticmethod
+    def forbidden_response(message):
+        return jsonify(message), 403
+
+    @staticmethod
+    def not_found_response(message):
+        return jsonify(message), 404

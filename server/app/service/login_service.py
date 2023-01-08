@@ -14,14 +14,9 @@ class LoginService:
         user = repository.get_user(user)
 
         if user is None:
-            return None
+            return False
 
         if (CryptographyUtil.encrypt(password, user.get_password_salt()) != user.get_password_hash()):
-            return None
+            return False
 
         return True
-
-    @staticmethod
-    def list_users():
-        repository = MongoRepository()
-        return repository.list_users()

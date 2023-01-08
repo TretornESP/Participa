@@ -1,42 +1,15 @@
 import os
 import redis
-
-from app.model.credentials_model import CredentialsModel
-from app.mapper.user_mapper import UserMapper
-from app.service.login_service import LoginService
+from flask import request, current_app
 from .route_master import RouteMaster
-
-from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, send_file, current_app
-)
+from app.mapper.user_mapper import UserMapper
+from app.service.user_service import UserService
 
 from flask_jwt_extended import (
     create_access_token, jwt_required, get_jwt_identity, create_refresh_token, get_jwt
 )
 
 bp = RouteMaster.add_route('security', origins = ['*'])
-config = current_app.myconfig['conf']
-jwt = current_app.jwt
-
-jwt_redis_blocklist = redis.StrictRedis(
-    host=config["trashcan_hostname"],
-    port=config["trashcan_port"],
-    db=config["trashcan_db"],
-    password=config["trashcan_password"],
-    decode_responses=True
-)
-
-
-@jwt.token_in_blocklist_loader
-def check_if_token_in_blocklist(jwt_header, jwt_payload: dict):
-    jti = jwt_payload['jti']
-    token_in_blocklist = jwt_redis_blocklist.get(jti)
-    return token_in_blocklist is not None
-
-
-@bp.route('/test', methods=['GET'])
-def test():
-	return 'Hello World'
 
 @bp.route('/login', methods=['POST'])
 def login():
@@ -46,7 +19,7 @@ def login():
         password = data['password']
         creds = CredentialsModel(user, password)
 
-        if LoginService.login(creds):
+        if (LoginService.login(creds) == True):
             access_token = create_access_token(identity=user)
             refresh_token = create_refresh_token(identity=user)
             return RouteMaster.ok_response(
@@ -61,10 +34,6 @@ def login():
             return RouteMaster.auth_required_response("Invalid credentials")
     except Exception as e:
         return RouteMaster.error_response("Invalid request")
-
-@bp.route('/listUsers', methods=['GET'])
-def list_users():
-    return {"users": UserMapper.model_to_dict_list(LoginService.list_users())}, 200
 
 @bp.route('/validateToken', methods=['GET'])
 @jwt_required()
@@ -86,8 +55,8 @@ def logout():
     ttype = get_jwt()['type']
 
     if ttype == 'access':
-        jwt_redis_blocklist.set(jti, '', ex=current_app.config['JWT_ACCESS_TOKEN_EXPIRES'] * 3600)
+        current_app.jwt_redis_blocklist.set(jti, '', ex=current_app.config['JWT_ACCESS_TOKEN_EXPIRES'] * 3600)
     else:
-        jwt_redis_blocklist.set(jti, '', ex=current_app.config['JWT_REFRESH_TOKEN_EXPIRES'] * (24*3600))
+        current_app.jwt_redis_blocklist.set(jti, '', ex=current_app.config['JWT_REFRESH_TOKEN_EXPIRES'] * (24*3600))
         
     return RouteMaster.ok_response({"msg":f"{ttype.capitalize()} token successfully revoked"})

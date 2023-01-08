@@ -22,3 +22,7 @@ class MongoRepository:
         if user is None:
             return None
         return UserMapper.repository_to_model(user)
+
+    def update_user(self, user, changes):
+        self.users_collection.update_one({'email': user}, {'$set': changes})
+        return self.get_user(user)

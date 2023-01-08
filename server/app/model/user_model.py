@@ -5,6 +5,11 @@ class UserModel:
         self.dni = dni
         self.password_hash = password_hash
         self.password_salt = password_salt
+
+    @staticmethod
+    def from_dict(source):
+        user = UserModel(source['name'], source['email'], source['dni'], source['password_hash'], source['password_salt'])
+        return user
     
     def get_name(self):
         return self.name
@@ -29,3 +34,9 @@ class UserModel:
             'password_hash': self.password_hash,
             'password_salt': self.password_salt
         }
+
+    def to_vo_dict(self):
+        data = self.to_dict()
+        data.pop('password_hash')
+        data.pop('password_salt')
+        return data
