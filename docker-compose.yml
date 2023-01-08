@@ -69,11 +69,11 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: '/participastorage'
+      device: '/participa/server'
       o: bind
   trashcanvol:
     driver: local
     driver_opts:
       type: none
-      device: '/trashcanstorage'
+      device: '/participa/trashcan'
       o: bind

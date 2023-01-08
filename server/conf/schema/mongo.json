@@ -19,12 +19,17 @@
       "user_collection": {
         "type": "string",
         "description": "The name of the user collection"
+      },
+      "proposal_collection": {
+        "type": "string",
+        "description": "The name of the proposal collection"
       }
     },
     "required": [
       "connstring",
       "database",
-      "user_collection"
+      "user_collection",
+      "proposal_collection"
     ],
     "additionalProperties": true
   }

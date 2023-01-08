@@ -4,7 +4,6 @@ from flask import request, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from .route_master import RouteMaster
-from app.mapper.user_mapper import UserMapper
 from app.service.user_service import UserService
 
 

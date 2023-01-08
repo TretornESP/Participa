@@ -69,3 +69,7 @@ class RouteMaster:
     @staticmethod
     def not_found_response(message):
         return jsonify(message), 404
+
+    @staticmethod
+    def created_response(message):
+        return jsonify(message), 201

@@ -8,7 +8,7 @@ from app.config import Config
 from app.controller.route_master import RouteMaster
 
 from flask_jwt_extended import (
-    create_access_token, jwt_required, get_jwt_identity, create_refresh_token, get_jwt
+    create_access_token, jwt_required, get_jwt_identity, create_refresh_token, get_jwt, set_access_cookies
 )
 
 def project_init():

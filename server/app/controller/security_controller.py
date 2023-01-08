@@ -2,7 +2,8 @@ import os
 import redis
 from flask import request, current_app
 from .route_master import RouteMaster
-from app.mapper.user_mapper import UserMapper
+
+from app.service.login_service import LoginService
 from app.service.user_service import UserService
 
 from flask_jwt_extended import (
@@ -13,27 +14,24 @@ bp = RouteMaster.add_route('security', origins = ['*'])
 
 @bp.route('/login', methods=['POST'])
 def login():
-    try:
-        data = request.get_json()
-        user = data['username']
-        password = data['password']
-        creds = CredentialsModel(user, password)
 
-        if (LoginService.login(creds) == True):
-            access_token = create_access_token(identity=user)
-            refresh_token = create_refresh_token(identity=user)
-            return RouteMaster.ok_response(
-                {
-                    "token": access_token,
-                    "refresh": refresh_token,
-                    "user": user,
-                    "message": "Login successful"
-                }
-            )
-        else:
-            return RouteMaster.auth_required_response("Invalid credentials")
-    except Exception as e:
-        return RouteMaster.error_response("Invalid request")
+    data = request.get_json()
+    user = data['username']
+    password = data['password']
+
+    if (LoginService.login(user, password) == True):
+        access_token = create_access_token(identity=user)
+        refresh_token = create_refresh_token(identity=user)
+        return RouteMaster.ok_response(
+            {
+                "token": access_token,
+                "refresh": refresh_token,
+                "user": user,
+                "message": "Login successful"
+            }
+        )
+    else:
+        return RouteMaster.auth_required_response("Invalid credentials")
 
 @bp.route('/validateToken', methods=['GET'])
 @jwt_required()
