@@ -25,8 +25,21 @@ services:
       - frontend
       - backend
 
+  mongo:
+    container_name: mongo
+    image: mongo:latest
+    restart: always
+    expose:
+      - "27017"
+    volumes:
+      - ./mongo:/data/db
+    networks:
+      - database
+
 networks:
   frontend:
     driver: bridge
   backend:
+    driver: bridge
+  database:
     driver: bridge
