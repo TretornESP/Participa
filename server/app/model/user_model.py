@@ -8,6 +8,8 @@ class UserModel:
 
     @staticmethod
     def from_dict(source):
+        if source is None:
+            return None
         user = UserModel(source['name'], source['email'], source['dni'], source['password_hash'], source['password_salt'])
         return user
     

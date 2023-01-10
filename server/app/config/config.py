@@ -83,7 +83,7 @@ class ConfigBase:
             print("[CONFIG] Error loading configuration: {}".format(e))
 
         logging.basicConfig(
-            level=logging.INFO,
+            level=logging.DEBUG,
             stream=sys.stdout,
             filemode="a+",
             format="%(asctime)-15s %(levelname)-8s %(message)s"

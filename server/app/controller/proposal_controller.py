@@ -9,6 +9,7 @@ bp = RouteMaster.add_route('proposal', origins = ['*'])
 
 @bp.route('/', methods=['GET'])
 @jwt_required()
+@RouteMaster.filter_input
 def list_proposals():
     if (request.args.get('items') is not None):
         if (request.args.get('start') is not None):
@@ -59,9 +60,8 @@ def create_proposal():
     description = data.get('description', None)
     photos = data.get('photos', None)
     location = data.get('location', None)
-    author = get_jwt_identity()
 
-    proposal = ProposalService.createProposal(title, description, photos, location, author)
+    proposal = ProposalService.createProposal(title, description, photos, location, get_jwt_identity())
     if (proposal is None):
         return RouteMaster.error_response({'message': 'Invalid request'})
     
@@ -78,9 +78,8 @@ def update_proposal(id):
     title = data.get('title', None)
     description = data.get('description', None)
     photos = data.get('photos', None)
-    author = get_jwt_identity()
 
-    proposal = ProposalService.updateProposal(id, title, description, photos, author)
+    proposal = ProposalService.updateProposal(id, title, description, photos, get_jwt_identity())
     if (proposal is None):
         return RouteMaster.error_response({'message': 'Invalid request'})
     

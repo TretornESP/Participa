@@ -1,7 +1,7 @@
 import os
 import redis
 from flask import request, current_app
-from .route_master import RouteMaster
+from .route_master import RouteMaster, UnsafeInputException
 
 from app.service.login_service import LoginService
 from app.service.user_service import UserService
@@ -12,9 +12,10 @@ from flask_jwt_extended import (
 
 bp = RouteMaster.add_route('security', origins = ['*'])
 
-@bp.route('/login', methods=['POST'])
-def login():
 
+@bp.route('/login', methods=['POST'])
+#@RouteMaster.filter_input # TODO: Enable this!
+def login():
     data = request.get_json()
     user = data['username']
     password = data['password']

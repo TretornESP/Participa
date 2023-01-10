@@ -5,3 +5,4 @@ flask-cors
 pymongo[srv]
 Flask-JWT-Extended
 redis
+bleach

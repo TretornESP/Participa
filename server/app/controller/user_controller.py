@@ -21,6 +21,7 @@ def get_user():
 
 @bp.route('/', methods=['PUT'])
 @jwt_required()
+@RouteMaster.filter_input
 def update_user():
     current_user_id = get_jwt_identity()
     user = UserService.updateUser(current_user_id, request.get_json())

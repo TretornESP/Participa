@@ -1,7 +1,7 @@
 import redis
 from datetime import timedelta, datetime, timezone
-
-from flask import Flask
+import json
+from flask import Flask, request
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from app.config import Config
@@ -48,7 +48,6 @@ def project_init():
             except (RuntimeError, KeyError):
                 # Case where there is not a valid JWT. Just return the original response
                 return response
-
         
     except KeyError:
         app.log.error("[INIT] Configuration not found!")
@@ -67,7 +66,7 @@ def project_init():
             app.log.info("[INIT] Registering routes...")
             resources = {}
             blueprints = []
-            RouteMaster.spawn_routes()
+            RouteMaster.spawn_routes(config=app.myconfig, logger=app.log)
 
             for route in RouteMaster.get_all_routes():
                 app.log.info("[INIT] Registering router: " + RouteMaster.get_name_for(route))
