@@ -34,6 +34,7 @@ def list_proposals():
 
 @bp.route('/<id>', methods=['GET'])
 @jwt_required()
+@RouteMaster.filter_input
 def get_proposal(id):
     proposal = ProposalService.getProposal(id)
     if (proposal is None):

@@ -62,14 +62,30 @@ class RouteMaster:
 
     @staticmethod
     def sanitize(request):
-        try:
-            parts = request.path.split("/")
+        print("Template rule: " + request.url_rule.rule)
+        print("Request path: " + request.path)
 
+        try:
             sanitizer = SANITIZER
-            for part in parts:
-                if part == "":
+
+            rule_parts = request.url_rule.rule.split("/")
+            path_parts = request.path.split("/")
+
+            if len(rule_parts) != len(path_parts):
+                raise UnsafeInputException("Invalid number of path parts")
+            
+            dynamic_elements = {}
+
+            for i in range(len(path_parts)):
+                current_path_part = path_parts[i]
+                current_rule_part = rule_parts[i]
+
+                if current_rule_part.startswith("<") and current_rule_part.endswith(">"):
+                    dynamic_elements[current_rule_part] = current_path_part
+                if current_rule_part == "":
                     continue
-                sanitizer = sanitizer[part]
+                sanitizer = sanitizer[current_rule_part]
+
             sanitizer = sanitizer[request.method.lower()]
             if request.data:
                 validate(instance=request.get_json(), schema=sanitizer["json"])
@@ -85,6 +101,12 @@ class RouteMaster:
                     else:
                         pargs[key] = value
                 validate(instance=pargs, schema=sanitizer["args"])
+            
+            if dynamic_elements != {}:
+                for item in sanitizer["uri"]:
+                    for key, value in dynamic_elements.items():
+                        if item["$name"] in key:
+                            validate(instance=value, schema=item)
         except jsonschema.exceptions.ValidationError as e:
             RouteMaster.log("Schema validation: " + str(e))
             raise UnsafeInputException(e)

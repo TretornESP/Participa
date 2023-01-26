@@ -20,6 +20,7 @@ db.users.insertMany([
     "name": "xabi",
     "email": "xabi@xabi.com",
     "dni": 4123124,
+    "photo": "https://tretornesp.com/cuak.jpg",
     "password_hash" : "7791aab6b05036537893253f84f6c649f09b9d051649a8d22d545a52b66496a3",
     "password_salt" : "gimmesomepepper"
   },
@@ -27,6 +28,7 @@ db.users.insertMany([
     "name": "xabi2",
     "email": "xabi2@xabi.com",
     "dni": 123123,
+    "photo": "https://tretornesp.com/cuak.jpg",
     "password_hash" : "7791aab6b05036537893253f84f6c649f09b9d051649a8d22d545a52b66496a3",
     "password_salt" : "gimmesomepepper"
   }
