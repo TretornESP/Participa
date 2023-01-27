@@ -1,12 +1,13 @@
 
 class ProposalModel:
-    def __init__(self, id, title, description, photos, author, created_at, likes):
+    def __init__(self, id, title, description, photos, author, created_at, coordinates, likes):
         self.id = id
         self.title = title
         self.description = description
         self.photos = photos
         self.author = author
         self.created_at = created_at
+        self.coordinates = coordinates
         self.likes = likes
 
     @staticmethod
@@ -18,6 +19,7 @@ class ProposalModel:
             source['photos'],
             source['author'],
             source['created_at'],
+            source['coordinates'],
             source['likes']
         )
     
@@ -39,12 +41,13 @@ class ProposalModel:
     def get_created_at(self):
         return self.created_at
 
+    def get_coordinates(self):
+        return self.coordinates
+
     def get_likes(self):
         return self.likes
 
     def to_dict(self):
-
-
         data = {
             'id': self.id,
             'title': self.title,
@@ -52,6 +55,7 @@ class ProposalModel:
             'photos': self.photos,
             'author': self.author,
             'created_at': self.created_at,
+            'coordinates': self.coordinates,
             'likes': self.likes
         }
 

@@ -48,7 +48,7 @@ class ProposalService:
             "title": title,
             "description": description,
             "photos": photos,
-            "location": location,
+            "coordinates": location,
             "author": author,
             "likes": 0,
             "created_at": int(time.time())

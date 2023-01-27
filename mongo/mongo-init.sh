@@ -38,147 +38,49 @@ db.users.insertMany([
 
 db.proposals.insertMany([
   {
-    "title": "Proposal 1",
-    "description": "Proposal 1 description",
+    "title": "Arboles en la plaza",
+    "description": "Me encantaria tener arboles en la plaza, son super bonitos y dan sombra",
     "photos": [
       "https://tretornesp.com/cuak.jpg",
       "https://tretornesp.com/cuak2.jpg"
     ],
-    "author": "xabi@xabi.com",
+    "author": "123123",
     "created_at": 1673198346,
+    "coordinates": {
+      "lat": 42.08744884607051,
+      "lng": -8.503972515463829
+    },
     "likes": 123
   },
   {
-    "title": "Proposal 2",
-    "description": "Proposal 2 description",
-      "photos": [
+    "title": "Gimnasio",
+    "description": "Querria un gimnasio en la plaza, para poder hacer deporte",
+    "photos": [
       "https://tretornesp.com/cuak.jpg",
       "https://tretornesp.com/cuak2.jpg"
     ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
+    "author": "123123",
+    "created_at": 1673199346,
+    "coordinates": {
+      "lat": 42.08982673620478,
+      "lng": -8.506367392838001
+    },
+    "likes": 111
   },
-    {
-    "title": "Proposal 3",
-    "description": "Proposal 3 description",
-      "photos": [
+  {
+    "title": "Rebeldia",
+    "description": "Queremos abrir una delegación de rebeldía en la plaza, junto a la plaza de abastos",
+    "photos": [
       "https://tretornesp.com/cuak.jpg",
       "https://tretornesp.com/cuak2.jpg"
     ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
-  },
-    {
-    "title": "Proposal 4",
-    "description": "Proposal 4 description",
-      "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
-    ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
-  },
-    {
-    "title": "Proposal 5",
-    "description": "Proposal 5 description",
-      "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
-    ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
-  },
-    {
-    "title": "Proposal 6",
-    "description": "Proposal 6 description",
-      "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
-    ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
-  },
-    {
-    "title": "Proposal 7",
-    "description": "Proposal 7 description",
-      "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
-    ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
-  },
-    {
-    "title": "Proposal 8",
-    "description": "Proposal 8 description",
-      "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
-    ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
-  },
-    {
-    "title": "Proposal 9",
-    "description": "Proposal 9 description",
-      "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
-    ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
-  },
-    {
-    "title": "Proposal 10",
-    "description": "Proposal 10 description",
-      "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
-    ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
-  },
-    {
-    "title": "Proposal 11",
-    "description": "Proposal 11 description",
-      "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
-    ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
-  },
-    {
-    "title": "Proposal 12",
-    "description": "Proposal 12 description",
-      "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
-    ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
-  },
-    {
-    "title": "Proposal 13",
-    "description": "Proposal 13 description",
-      "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
-    ],
-    "author": "xabi@xabi.com",
-    "created_at": 1673198446,
-    "likes": 222
+    "author": "123123",
+    "created_at": 1673158346,
+    "coordinates": {
+      "lat": 42.079786840543754,
+      "lng": -8.501386530697346
+    },
+    "likes": 12
   }
 ])
 EOF

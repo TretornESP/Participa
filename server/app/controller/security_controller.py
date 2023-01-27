@@ -14,7 +14,7 @@ bp = RouteMaster.add_route('security', origins = ['*'])
 
 
 @bp.route('/login', methods=['POST'])
-#@RouteMaster.filter_input # TODO: Enable this!
+@RouteMaster.filter_input
 def login():
     data = request.get_json()
     user = data['username']

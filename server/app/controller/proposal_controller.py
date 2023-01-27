@@ -43,6 +43,7 @@ def get_proposal(id):
 
 @bp.route('/<id>', methods=['DELETE'])
 @jwt_required()
+@RouteMaster.filter_input
 def delete_proposal(id):
     if ProposalService.deleteProposal(id, get_jwt_identity()):
         return RouteMaster.ok_response({'message': 'Proposal deleted'})
@@ -51,16 +52,17 @@ def delete_proposal(id):
 
 @bp.route('/', methods=['POST'])
 @jwt_required()
+@RouteMaster.filter_input
 def create_proposal():
     data = request.get_json()
     
     if (data is None):
         return RouteMaster.error_response({'message': 'Invalid request'})
 
-    title = data.get('title', None)
-    description = data.get('description', None)
-    photos = data.get('photos', None)
-    location = data.get('location', None)
+    title = data["title"]
+    description = data["description"]
+    photos = data["photos"]
+    location = data["coordinates"]
 
     proposal = ProposalService.createProposal(title, description, photos, location, get_jwt_identity())
     if (proposal is None):
@@ -70,6 +72,7 @@ def create_proposal():
 
 @bp.route('/<id>', methods=['PUT'])
 @jwt_required()
+@RouteMaster.filter_input
 def update_proposal(id):
     data = request.get_json()
 
@@ -80,11 +83,12 @@ def update_proposal(id):
     description = data.get('description', None)
     photos = data.get('photos', None)
 
+
     proposal = ProposalService.updateProposal(id, title, description, photos, get_jwt_identity())
     if (proposal is None):
         return RouteMaster.error_response({'message': 'Invalid request'})
     
-    return RouteMaster.ok_response({'likes': str(proposal)})
+    return RouteMaster.ok_response({'proposal': proposal.to_vo_dict()})
 
 @bp.route('/like', methods=['GET'])
 @jwt_required()
