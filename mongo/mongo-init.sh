@@ -22,7 +22,8 @@ db.users.insertMany([
     "dni": 4123124,
     "photo": "https://tretornesp.com/cuak.jpg",
     "password_hash" : "7791aab6b05036537893253f84f6c649f09b9d051649a8d22d545a52b66496a3",
-    "password_salt" : "gimmesomepepper"
+    "password_salt" : "gimmesomepepper",
+    "liked_proposals": []
   },
   {
     "name": "xabi2",
@@ -30,7 +31,8 @@ db.users.insertMany([
     "dni": 123123,
     "photo": "https://tretornesp.com/cuak.jpg",
     "password_hash" : "7791aab6b05036537893253f84f6c649f09b9d051649a8d22d545a52b66496a3",
-    "password_salt" : "gimmesomepepper"
+    "password_salt" : "gimmesomepepper",
+    "liked_proposals": []
   }
 ])
 

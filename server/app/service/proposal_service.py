@@ -97,3 +97,49 @@ class ProposalService:
             changes['photos'] = photos
         
         return ProposalModel.from_dict(repository.update_proposal(id, changes))
+
+    @staticmethod
+    def likeProposal(id, user):
+        repository = MongoRepository()
+        user_data = repository.get_user(user)
+        proposal = repository.get_proposal(id)
+
+        if (proposal is None):
+            return None
+
+        if (user_data is None):
+            return None
+        
+        if id in user_data["liked_proposals"]:
+            return False
+
+        user_data["liked_proposals"].append(id)
+        proposal['likes'] += 1
+
+        repository.update_user(user, user_data)
+        repository.update_proposal(id, proposal)
+
+        return proposal['likes']
+
+    @staticmethod
+    def unlikeProposal(id, user):
+        repository = MongoRepository()
+        user_data = repository.get_user(user)
+        proposal = repository.get_proposal(id)
+
+        if (proposal is None):
+            return None
+
+        if (user_data is None):
+            return None
+        
+        if id not in user_data["liked_proposals"]:
+            return False
+
+        user_data["liked_proposals"].remove(id)
+        proposal['likes'] -= 1
+
+        repository.update_user(user, user_data)
+        repository.update_proposal(id, proposal)
+
+        return proposal['likes']

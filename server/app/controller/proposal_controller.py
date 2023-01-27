@@ -84,4 +84,40 @@ def update_proposal(id):
     if (proposal is None):
         return RouteMaster.error_response({'message': 'Invalid request'})
     
-    return RouteMaster.ok_response({'proposal': proposal.to_vo_dict()})
+    return RouteMaster.ok_response({'likes': str(proposal)})
+
+@bp.route('/like', methods=['GET'])
+@jwt_required()
+@RouteMaster.filter_input
+def like_proposal():
+
+    id = request.args.get('id')
+    if (id is None):
+        return RouteMaster.error_response({'message': 'Id required'})
+
+    proposal = ProposalService.likeProposal(id, get_jwt_identity())
+    if (proposal is None):
+        return RouteMaster.error_response({'message': 'Invalid id or user token'})
+    
+    if (proposal == False):
+        return RouteMaster.error_response({'message': 'Cant like proposal twice'})
+
+    return RouteMaster.ok_response({'likes': str(proposal)})
+
+@bp.route('/dislike', methods=['GET'])
+@jwt_required()
+@RouteMaster.filter_input
+def unlike_proposal():
+
+    id = request.args.get('id')
+    if (id is None):
+        return RouteMaster.error_response({'message': 'Id required'})
+
+    proposal = ProposalService.unlikeProposal(id, get_jwt_identity())
+    if (proposal is None):
+        return RouteMaster.error_response({'message': 'Invalid id or user token'})
+    
+    if (proposal == False):
+        return RouteMaster.error_response({'message': 'Cant dislike a proposal you didnt like'})
+
+    return RouteMaster.ok_response({'likes': str(proposal)})

@@ -110,6 +110,9 @@ class RouteMaster:
         except jsonschema.exceptions.ValidationError as e:
             RouteMaster.log("Schema validation: " + str(e))
             raise UnsafeInputException(e)
+        except KeyError as e:
+            RouteMaster.log("Filtering requested but document not defined on security config: " + str(e))
+            raise UnsafeInputException(e)
         except Exception as e:
             RouteMaster.log("Other exception: " + str(e))
             raise UnsafeInputException(e)
