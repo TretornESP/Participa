@@ -6,3 +6,4 @@ pymongo[srv]
 Flask-JWT-Extended
 redis
 bleach
+Pillow

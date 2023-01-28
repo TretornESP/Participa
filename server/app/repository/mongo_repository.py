@@ -11,7 +11,8 @@ class MongoRepository:
         self.client = MongoClient(self.connstring)
         self.users_collection = self.client[self.config['database']][self.config['user_collection']]
         self.proposals_collection = self.client[self.config['database']][self.config['proposal_collection']]
-
+        self.photos_collection = self.client[self.config['database']][self.config['photo_collection']]
+        
     def list_users(self):
         return self.users_collection.find()
 
@@ -44,3 +45,6 @@ class MongoRepository:
     def update_proposal(self, proposal_id, changes):
         self.proposals_collection.update_one({'_id': ObjectId(proposal_id)}, {'$set': changes})
         return self.get_proposal(proposal_id)
+
+    def upload_photo(self, photo):
+        return self.photos_collection.insert_one(photo).inserted_id

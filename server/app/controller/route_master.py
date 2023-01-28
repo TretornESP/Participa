@@ -62,8 +62,6 @@ class RouteMaster:
 
     @staticmethod
     def sanitize(request):
-        print("Template rule: " + request.url_rule.rule)
-        print("Request path: " + request.path)
 
         try:
             sanitizer = SANITIZER

@@ -14,6 +14,7 @@ db.createUser(
 use ${MONGO_DB_NAME}
 db.createCollection("users")
 db.createCollection("proposals")
+db.createCollection("photos")
 
 db.users.insertMany([
   {
