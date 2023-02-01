@@ -1,6 +1,7 @@
 conf/*
 !conf/schema/
 !conf/.gitkeep
+!conf/sanitizer.json
 __pycache__
 *.log
 *.pyc

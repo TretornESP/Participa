@@ -1,0 +1,269 @@
+{
+    "$schema": "schema/sanitizer.json",
+    "security": {
+        "login": {
+            "post": {
+                "json": {
+                    "$id": "https://participa.tretornesp.com/server/request/security/login/post/json.json",
+                    "$schema": "https://json-schema.org/draft/2020-12/schema",
+                    "type": "object",
+                    "properties": {
+                        "username": {
+                        "type": "string",
+                        "description": "The username (email)",
+                        "pattern": "^[a-zA-Z0-9_.]+[@]{1}[a-z0-9]+[\\.][a-z]+$"
+                        },
+                        "password": {
+                        "type": "string",
+                        "description": "The password",
+                        "pattern": "^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{10,}$"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "user": {
+        "put": {
+            "json": {
+                "$id": "https://participa.tretornesp.com/server/request/user/put/json.json",
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                    "dni": {
+                        "type": "string",
+                        "description": "dni",
+                        "pattern": "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "email",
+                        "pattern": "^[a-zA-Z0-9_.]+[@]{1}[a-z0-9]+[\\.][a-z]+$"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "name",
+                        "pattern": "^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$"
+                    },
+                    "photo": {
+                        "type": "string",
+                        "description": "photo",
+                        "pattern": "^[0-9a-fA-F]{24}$"
+                    }
+                },
+                "required": [
+                ],
+                "additionalProperties": false
+            }
+        }
+    },
+    "proposal": {
+        "get": {
+            "json": {
+                "$id": "https://participa.tretornesp.com/server/request/proposal/post/json.json",
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {},
+                "additionalProperties": false
+            }, 
+            "args": {
+                "$id": "https://participa.tretornesp.com/server/request/proposal/post/args.json",
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "integer",
+                        "description": "Number of items to return",
+                        "minimum": 1,
+                        "maximum": 100
+                    },
+                    "start": {
+                        "type": "string",
+                        "description": "Start id",
+                        "pattern": "^[0-9a-fA-F]{24}$"
+                    }
+                },
+                "additionalProperties": false,
+                "required": [
+                    "items",
+                    "start"
+                ]
+            }
+        },
+        "post": {
+            "json": {
+                "$id": "https://participa.tretornesp.com/server/request/proposal/post/json.json",
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "description": "The title of the proposal",
+                        "pattern": "^[A-Za-z0-9ñÑ ]*$",
+                        "minLength": 10,
+                        "maxLength": 40
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "The description",
+                        "pattern": "[A-Za-z0-9ñÑ._~()'\"!*#:@,;+?¡¿-]*$",
+                        "minLength": 80,
+                        "maxLength": 500
+                    },
+                    "photos": {
+                        "type": "array",
+                        "description": "The photo ids",
+                        "items": {
+                            "type": "string",
+                            "pattern": "^[0-9a-fA-F]{24}$"
+                        },
+                        "minItems": 1,
+                        "maxItems": 6
+                    },
+                    "coordinates": {
+                        "type": "object",
+                        "description": "The coordinates",
+                        "properties": {
+                            "lat": {
+                                "type": "number",
+                                "description": "The latitude",
+                                "minimum": -90,
+                                "maximum": 90
+                            },
+                            "lng": {
+                                "type": "number",
+                                "description": "The longitude",
+                                "minimum": -180,
+                                "maximum": 180
+                            }
+                        },
+                        "required": [
+                            "lat",
+                            "lng"
+                        ],
+                        "additionalProperties": false
+                    }
+                },
+                "required": [
+                    "title",
+                    "description",
+                    "photos",
+                    "coordinates"
+                ],
+                "additionalProperties": false
+            }
+        },
+        "<id>": {
+            "get": {
+                "uri": [
+                    {
+                        "$name": "<id>",
+                        "$id": "https://participa.tretornesp.com/server/request/proposal/<id>/get/uri.json",
+                        "$schema": "https://json-schema.org/draft/2020-12/schema",
+                        "type": "string",
+                        "description": "The proposal id",
+                        "pattern": "^[0-9a-fA-F]{24}$"
+                    }
+                ]
+            },
+            "delete": {
+                "uri": [
+                    {
+                        "$name": "<id>",
+                        "$id": "https://participa.tretornesp.com/server/request/proposal/<id>/delete/uri.json",
+                        "$schema": "https://json-schema.org/draft/2020-12/schema",
+                        "type": "string",
+                        "description": "The proposal id",
+                        "pattern": "^[0-9a-fA-F]{24}$"
+                    }
+                ]
+            },
+            "put": {
+                "uri": [
+                    {
+                        "$name": "<id>",
+                        "$id": "https://participa.tretornesp.com/server/request/proposal/<id>/put/uri.json",
+                        "$schema": "https://json-schema.org/draft/2020-12/schema",
+                        "type": "string",
+                        "description": "The proposal id",
+                        "pattern": "^[0-9a-fA-F]{24}$"
+                    }
+                ],
+                "json": {
+                    "$id": "https://participa.tretornesp.com/server/request/proposal/<id>/put/json.json",
+                    "$schema": "https://json-schema.org/draft/2020-12/schema",
+                    "type": "object",
+                    "properties": {
+                        "title": {
+                            "type": "string",
+                            "description": "The title of the proposal",
+                            "pattern": "^[A-Za-z0-9ñÑ ]*$",
+                            "minLength": 10,
+                            "maxLength": 40
+                        },
+                        "description": {
+                            "type": "string",
+                            "description": "The description",
+                            "pattern": "[A-Za-z0-9ñÑ._~()'\"!*#:@,;+?¡¿-]*$",
+                            "minLength": 80,
+                            "maxLength": 500
+                        },
+                        "photos": {
+                            "type": "array",
+                            "description": "The photo ids",
+                            "items": {
+                                "type": "string",
+                                "pattern": "^[0-9a-fA-F]{24}$"
+                            },
+                            "minItems": 1,
+                            "maxItems": 6
+                        }
+                    },
+                    "required": [
+                    ],
+                    "additionalProperties": false
+                }
+            }
+        },
+        "like": {
+            "get": {
+                "args": {
+                    "$id": "https://participa.tretornesp.com/server/request/proposal/like/get/args.json",
+                    "$schema": "https://json-schema.org/draft/2020-12/schema",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "Id to like",
+                            "pattern": "^[0-9a-fA-F]{24}$"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "id"
+                    ]
+                }
+            }
+        },
+        "dislike": {
+            "get": {
+                "args": {
+                    "$id": "https://participa.tretornesp.com/server/request/proposal/dislike/get/args.json",
+                    "$schema": "https://json-schema.org/draft/2020-12/schema",
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string",
+                            "description": "Id to dislike",
+                            "pattern": "^[0-9a-fA-F]{24}$"
+                        }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                        "id"
+                    ]
+                }
+            }
+        }
+    }
+}
