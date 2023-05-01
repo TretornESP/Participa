@@ -1,6 +1,6 @@
 
 class ProposalModel:
-    def __init__(self, id, title, description, photos, author, created_at, coordinates, likes):
+    def __init__(self, id, title, description, photos, author, created_at, coordinates, likes, deleted_at, main_photo):
         self.id = id
         self.title = title
         self.description = description
@@ -9,6 +9,8 @@ class ProposalModel:
         self.created_at = created_at
         self.coordinates = coordinates
         self.likes = likes
+        self.deleted_at = deleted_at
+        self.main_photo = main_photo
 
     @staticmethod
     def from_dict(source):
@@ -17,10 +19,12 @@ class ProposalModel:
             source['title'],
             source['description'],
             source['photos'],
-            source['author'],
+            str(source['author']),
             source['created_at'],
             source['coordinates'],
-            source['likes']
+            source['likes'],
+            source['deleted_at'],
+            source['main_photo']
         )
     
     def get_id(self):
@@ -47,6 +51,12 @@ class ProposalModel:
     def get_likes(self):
         return self.likes
 
+    def get_deleted_at(self):
+        return self.deleted_at
+
+    def get_main_photo(self):
+        return self.main_photo
+
     def to_dict(self):
         data = {
             'id': self.id,
@@ -56,15 +66,16 @@ class ProposalModel:
             'author': self.author,
             'created_at': self.created_at,
             'coordinates': self.coordinates,
-            'likes': self.likes
+            'likes': self.likes,
+            'deleted_at': self.deleted_at,
+            'main_photo': self.main_photo
         }
 
         if self.id is None:
             data.pop('id')
-        
         return data
 
     def to_vo_dict(self):
         data = self.to_dict()
-        data.pop('author')
+        data.pop('deleted_at')
         return data

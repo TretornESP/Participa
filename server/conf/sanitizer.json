@@ -26,7 +26,43 @@
     "user": {
         "put": {
             "json": {
-                "$id": "https://participa.tretornesp.com/server/request/user/put/json.json",
+                "$id": "https://participa.tretornesp.com/server/request/user/put/json",
+                "$schema": "https://json-schema.org/draft/2020-12/schema",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "name",
+                        "pattern": "^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$"
+                    },
+                    "surname": {
+                        "type": "string",
+                        "description": "name",
+                        "pattern": "^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$"
+                    },
+                    "photo": {
+                        "type": "string",
+                        "description": "photo",
+                        "pattern": "^https://tretornesp.com/photos/.*$"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "password",
+                        "pattern": "^(?=.*[a-z]).{6,}$"
+                    },
+                    "public": {
+                        "type": "boolean",
+                        "description": "public"
+                    }
+                },
+                "required": [
+                ],
+                "additionalProperties": false
+            }
+        },
+        "post": {
+            "json": {
+                "$id": "https://participa.tretornesp.com/server/request/user/post/json",
                 "$schema": "https://json-schema.org/draft/2020-12/schema",
                 "type": "object",
                 "properties": {
@@ -45,13 +81,34 @@
                         "description": "name",
                         "pattern": "^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$"
                     },
+                    "surname": {
+                        "type": "string",
+                        "description": "surname",
+                        "pattern": "^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$"
+                    },
                     "photo": {
                         "type": "string",
                         "description": "photo",
-                        "pattern": "^[0-9a-fA-F]{24}$"
+                        "pattern": "^https://tretornesp.com/photos/.*$"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "password",
+                        "pattern": "^(?=.*[a-z]).{6,}$"
+                    },
+                    "public": {
+                        "type": "boolean",
+                        "description": "public"
                     }
                 },
                 "required": [
+                    "dni",
+                    "photo",
+                    "email",
+                    "name",
+                    "surname",
+                    "password",
+                    "public"
                 ],
                 "additionalProperties": false
             }
@@ -115,10 +172,15 @@
                         "description": "The photo ids",
                         "items": {
                             "type": "string",
-                            "pattern": "^[0-9a-fA-F]{24}$"
+                            "pattern": "^https://tretornesp.com/photos/.*$"
                         },
                         "minItems": 1,
                         "maxItems": 6
+                    },
+                    "main_photo": {
+                        "type": "string",
+                        "description": "The main photo id",
+                        "pattern": "^https://tretornesp.com/photos/.*$"
                     },
                     "coordinates": {
                         "type": "object",
@@ -148,6 +210,7 @@
                     "title",
                     "description",
                     "photos",
+                    "main_photo",
                     "coordinates"
                 ],
                 "additionalProperties": false

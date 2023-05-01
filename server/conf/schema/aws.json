@@ -1,0 +1,35 @@
+{
+    "$id": "https://participa.tretornesp.com/server/aws.json",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "Aws configuration file",
+    "type": "object",
+    "properties": {
+      "$schema": {
+        "type": "string",
+        "description": "The schema for this file"
+      },
+      "key_id": {
+        "type": "string",
+        "description": "Key id"
+      },
+      "key": {
+        "type": "string",
+        "description": "The key"
+      },
+      "region": {
+        "type": "string",
+        "description": "The region"
+      },
+      "photo_bucket": {
+        "type": "string",
+        "description": "The name of the photo bucket"
+      }
+    },
+    "required": [
+      "key_id",
+      "key",
+      "region",
+      "photo_bucket"
+    ],
+    "additionalProperties": false
+  }

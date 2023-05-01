@@ -10,7 +10,7 @@ class LoginService:
     def login(user, password):
 
         repository = MongoRepository()
-        user = UserModel.from_dict(repository.get_user(user))
+        user = UserModel.from_dict(repository.get_user_by_email(user))
 
         if user is None:
             return False

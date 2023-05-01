@@ -30,7 +30,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"xabi@xabi.es\",\r\n    \"password\": \"patatoska\"\r\n}",
+							"raw": "{\r\n    \"username\": \"xabi@xabi.es\",\r\n    \"password\": \"changeme\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -59,7 +59,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3MzE4ODQ0MSwianRpIjoiOTA1YzJjYmYtNDA2OC00MmYzLTkzYzItNGFkMWY5ODhlYzY5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6InhhYmlAeGFiaS5lcyIsIm5iZiI6MTY3MzE4ODQ0MSwiZXhwIjoxNjczMTkyMDQxfQ.XKg6QioTsObvu9R2eqMadi1ZKwo1EzNf3_gKea9jQYI",
+									"value": "changeme",
 									"type": "string"
 								}
 							]
@@ -88,7 +88,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY3MzE4ODQ0MSwianRpIjoiNGVkYmYzZGQtMjkzOC00NTc4LWFlMzYtMGE5OGFkOGI1NjViIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJ4YWJpQHhhYmkuZXMiLCJuYmYiOjE2NzMxODg0NDEsImV4cCI6MTY3NTc4MDQ0MX0.v0_wT7ebnR1mlR9dfN878FtTnNBdEL8I6v7zsTggmCw",
+									"value": "changeme",
 									"type": "string"
 								}
 							]
@@ -151,6 +151,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost/user/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -176,13 +203,100 @@
 				{
 					"name": "create",
 					"request": {
-						"method": "GET",
-						"header": []
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "changeme",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Hoy voy a contaros una historia maravillosa sobre la patata de tu petete estamos en varias historias y etece errece bta chuty skone jorobate flanders jorobate flanders jorobate flanders jorobate flanders jorobate flanders jorobate flanders jorobate flanders\",\r\n    \"photos\": [\r\n        \"63d45318e09c5fef99779614\",\r\n        \"63d45338e09c5fef99779614\"\r\n    ],\r\n    \"title\": \"Hi patato petete\",\r\n    \"coordinates\": {\r\n        \"lat\": 42.08687855718967,\r\n        \"lng\": -8.503621146082878\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost/proposal/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"proposal",
+								""
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost/proposal/63bb24c1e3014ff43c340071",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"proposal",
+								"63bb24c1e3014ff43c340071"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "changeme",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Super nuevo titulo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost/proposal/63d459d162e83046a0b27c8a",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"proposal",
+								"63d459d162e83046a0b27c8a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "like",
 					"request": {
 						"method": "GET",
 						"header": []
@@ -190,7 +304,20 @@
 					"response": []
 				},
 				{
-					"name": "edit",
+					"name": "dislike",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "uploads",
+			"item": [
+				{
+					"name": "photo",
 					"request": {
 						"method": "GET",
 						"header": []

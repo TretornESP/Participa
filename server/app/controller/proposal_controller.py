@@ -11,6 +11,11 @@ bp = RouteMaster.add_route('proposal', origins = ['*'])
 @jwt_required()
 @RouteMaster.filter_input
 def list_proposals():
+    user_id = get_jwt_identity()
+    user = UserService.getUser(user_id)
+    if (user is None):
+        return RouteMaster.unauthorized_response({'message': 'User not found'})
+
     if (request.args.get('items') is not None):
         if (request.args.get('start') is not None):
             start = request.args.get('start')
@@ -36,6 +41,11 @@ def list_proposals():
 @jwt_required()
 @RouteMaster.filter_input
 def get_proposal(id):
+    user_id = get_jwt_identity()
+    user = UserService.getUser(user_id)
+    if (user is None):
+        return RouteMaster.unauthorized_response({'message': 'User not found'})
+
     proposal = ProposalService.getProposal(id)
     if (proposal is None):
         return RouteMaster.not_found_response({'message': 'Proposal not found'})
@@ -45,6 +55,11 @@ def get_proposal(id):
 @jwt_required()
 @RouteMaster.filter_input
 def delete_proposal(id):
+    user_id = get_jwt_identity()
+    user = UserService.getUser(user_id)
+    if (user is None):
+        return RouteMaster.unauthorized_response({'message': 'User not found'})
+
     if ProposalService.deleteProposal(id, get_jwt_identity()):
         return RouteMaster.ok_response({'message': 'Proposal deleted'})
     else:
@@ -54,17 +69,26 @@ def delete_proposal(id):
 @jwt_required()
 @RouteMaster.filter_input
 def create_proposal():
+    user_id = get_jwt_identity()
+    user = UserService.getUser(user_id)
+    if (user is None):
+        return RouteMaster.unauthorized_response({'message': 'User not found'})
+
     data = request.get_json()
     
     if (data is None):
         return RouteMaster.error_response({'message': 'Invalid request'})
 
-    title = data["title"]
-    description = data["description"]
-    photos = data["photos"]
-    location = data["coordinates"]
+    try:
+        title = data["title"]
+        description = data["description"]
+        photos = data["photos"]
+        main_photo = data["main_photo"]
+        location = data["coordinates"]
+    except:
+        return RouteMaster.error_response({'message': 'Invalid request'})
 
-    proposal = ProposalService.createProposal(title, description, photos, location, get_jwt_identity())
+    proposal = ProposalService.createProposal(title, description, photos, main_photo, location, get_jwt_identity())
     if (proposal is None):
         return RouteMaster.error_response({'message': 'Invalid request'})
     
@@ -74,17 +98,23 @@ def create_proposal():
 @jwt_required()
 @RouteMaster.filter_input
 def update_proposal(id):
+    user_id = get_jwt_identity()
+    user = UserService.getUser(user_id)
+    if (user is None):
+        return RouteMaster.unauthorized_response({'message': 'User not found'})
+
     data = request.get_json()
 
     if (data is None):
-        return RouteMaster.error_response({'message': 'Invalid request'})
+        return RouteMaster.error_response({'message': 'Invalid request, no data'})
 
     title = data.get('title', None)
     description = data.get('description', None)
     photos = data.get('photos', None)
+    main_photo = data.get('main_photo', None)
 
 
-    proposal = ProposalService.updateProposal(id, title, description, photos, get_jwt_identity())
+    proposal = ProposalService.updateProposal(id, title, description, photos, main_photo, get_jwt_identity())
     if (proposal is None):
         return RouteMaster.error_response({'message': 'Invalid request'})
     
@@ -94,6 +124,10 @@ def update_proposal(id):
 @jwt_required()
 @RouteMaster.filter_input
 def like_proposal():
+    user_id = get_jwt_identity()
+    user = UserService.getUser(user_id)
+    if (user is None):
+        return RouteMaster.unauthorized_response({'message': 'User not found'})
 
     id = request.args.get('id')
     if (id is None):
@@ -112,7 +146,11 @@ def like_proposal():
 @jwt_required()
 @RouteMaster.filter_input
 def unlike_proposal():
-
+    user_id = get_jwt_identity()
+    user = UserService.getUser(user_id)
+    if (user is None):
+        return RouteMaster.unauthorized_response({'message': 'User not found'})
+        
     id = request.args.get('id')
     if (id is None):
         return RouteMaster.error_response({'message': 'Id required'})

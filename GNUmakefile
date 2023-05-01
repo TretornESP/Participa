@@ -55,3 +55,6 @@ deploy:
 	@make pull
 	@make folders
 	@make rebuild
+
+backup:
+	@docker run --rm --volumes-from mongo -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /data/db

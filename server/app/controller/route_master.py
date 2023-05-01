@@ -141,6 +141,10 @@ class RouteMaster:
         return [ROUTES[route]["bp"] for route in ROUTES]
 
     @staticmethod
+    def created_response(message):
+        return jsonify(message), 201
+
+    @staticmethod
     def ok_response(message):
         return jsonify(message), 200
     
