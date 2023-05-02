@@ -16,6 +16,18 @@
         "type": "string",
         "description": "The root for the API"
       },
+      "hostname": {
+        "type": "string",
+        "description": "The hostname for the API"
+      },
+      "port": {
+        "type": "integer",
+        "description": "The port for the API"
+      },
+      "method": {
+        "type": "string",
+        "description": "The method for the API"
+      },
       "secret_key": {
         "type": "string",
         "description": "The secret key for the API"
@@ -55,6 +67,9 @@
       "access_token_expiration",
       "refresh_token_expiration",
       "trashcan_hostname",
+      "method",
+      "hostname",
+      "port",
       "trashcan_port",
       "trashcan_password",
       "trashcan_db",

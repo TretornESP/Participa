@@ -43,7 +43,7 @@
                     "photo": {
                         "type": "string",
                         "description": "photo",
-                        "pattern": "^https://tretornesp.com/photos/.*$"
+                        "pattern": "^https://participasalvaterra.s3.eu-north-1.amazonaws.com/.*$"
                     },
                     "password": {
                         "type": "string",
@@ -89,7 +89,7 @@
                     "photo": {
                         "type": "string",
                         "description": "photo",
-                        "pattern": "^https://tretornesp.com/photos/.*$"
+                        "pattern": "^https://participasalvaterra.s3.eu-north-1.amazonaws.com/.*$"
                     },
                     "password": {
                         "type": "string",
@@ -172,7 +172,7 @@
                         "description": "The photo ids",
                         "items": {
                             "type": "string",
-                            "pattern": "^https://tretornesp.com/photos/.*$"
+                            "pattern": "^https://participasalvaterra.s3.eu-north-1.amazonaws.com/.*$"
                         },
                         "minItems": 1,
                         "maxItems": 6
@@ -180,7 +180,7 @@
                     "main_photo": {
                         "type": "string",
                         "description": "The main photo id",
-                        "pattern": "^https://tretornesp.com/photos/.*$"
+                        "pattern": "^https://participasalvaterra.s3.eu-north-1.amazonaws.com/.*$"
                     },
                     "coordinates": {
                         "type": "object",

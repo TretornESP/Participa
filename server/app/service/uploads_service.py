@@ -3,6 +3,7 @@ import base64
 from app.repository.s3_repository import S3Repository
 from app.controller.route_master import RouteMaster
 from app.util.cryptography_util import CryptographyUtil
+from app.config import Config
 from PIL import Image
 from io import BytesIO
 
@@ -21,8 +22,14 @@ class UploadsService:
             image.save(buffered, format="JPEG")
             RouteMaster.log("Buffered size: " + str(buffered.getbuffer().nbytes))
             content_type = "image/jpeg"
+            buffered.seek(0)
         except Exception as e:
             RouteMaster.log("Error uploading photo: " + str(e))
             return None
 
-        return str(repository.upload_fileobj(buffered, str(user_id) + "/" + str(CryptographyUtil.generate_image_key()) + ".jpg", content_type))
+        return repository.upload_fileobj(buffered, str(user_id) + "/" + str(CryptographyUtil.generate_image_key()) + ".jpg", content_type)
+
+    @staticmethod
+    def presign(key):
+        repository = S3Repository()
+        return repository.get_presigned_url(key)

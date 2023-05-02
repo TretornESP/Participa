@@ -6,9 +6,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from .route_master import RouteMaster
 from app.service.user_service import UserService
 
-
-
-bp = RouteMaster.add_route('user', origins = ['*'])
+bp = RouteMaster.add_route('user', origins = ['https://localhost'])
 
 @bp.route('/', methods=['GET'])
 @jwt_required()

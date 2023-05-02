@@ -23,6 +23,11 @@ class UserService:
         return UserModel.from_dict(repository.update_user(user, changes))
 
     @staticmethod
+    def isVerified(user):
+        repository = MongoRepository()
+        return repository.is_verified(user)
+
+    @staticmethod
     def registerUser(user):
         repository = MongoRepository()
 

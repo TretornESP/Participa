@@ -29,6 +29,9 @@ class MongoRepository:
     def get_user(self, user):
         return self.users_collection.find_one({'_id': ObjectId(user)})
 
+    def is_verified(self, user):
+        return self.users_collection.find_one({'_id': ObjectId(user), 'verified': True})
+
     def update_user(self, user, changes):
         self.users_collection.update_one({'_id': ObjectId(user)}, {'$set': changes})
         return self.get_user(user)

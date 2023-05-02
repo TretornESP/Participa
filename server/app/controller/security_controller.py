@@ -10,7 +10,7 @@ from flask_jwt_extended import (
     create_access_token, jwt_required, get_jwt_identity, create_refresh_token, get_jwt
 )
 
-bp = RouteMaster.add_route('security', origins = ['*'])
+bp = RouteMaster.add_route('security', origins = ['https://localhost'])
 
 @bp.route('/login', methods=['POST'])
 @jwt_required(optional=True)
