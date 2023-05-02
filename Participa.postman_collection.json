@@ -358,8 +358,31 @@
 				{
 					"name": "presign",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "changeme",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "https://localhost/uploads/photo/6450443ab13b889314d2cd50/13107662245843457970.jpg",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"uploads",
+								"photo",
+								"6450443ab13b889314d2cd50",
+								"13107662245843457970.jpg"
+							]
+						}
 					},
 					"response": []
 				}
