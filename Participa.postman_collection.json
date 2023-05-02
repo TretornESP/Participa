@@ -319,6 +319,45 @@
 				{
 					"name": "photo",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "changeme",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/85562/Desktop/logo_vicon.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://localhost/uploads/photo",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"uploads",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "presign",
+					"request": {
 						"method": "GET",
 						"header": []
 					},
