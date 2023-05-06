@@ -67,7 +67,7 @@ class ProposalService:
 
         proposal_model = ProposalModel.from_dict(data)
 
-        proposal = repository.create_proposal(proposal_model.to_dict())
+        proposal = repository.create_proposal(proposal_model.to_creation_dict())
 
         if (proposal is None):
             return None
@@ -98,8 +98,10 @@ class ProposalService:
         repository = MongoRepository()
         proposal = repository.get_proposal(id)
         if (proposal is None):
+            RouteMaster.log("Proposal not found")
             return None
-        if (proposal['author'] != author):
+        if (str(proposal['author']) != str(author)):
+            RouteMaster.log("User not authorized to update proposal (user: " + str(author) + ", proposal: " + str(proposal['author']) + ")")
             return None
 
         changes = {}
@@ -142,10 +144,10 @@ class ProposalService:
         return proposal['likes']
 
     @staticmethod
-    def unlikeProposal(id, user):
+    def unlikeProposal(pid, user):
         repository = MongoRepository()
         user_data = repository.get_user(user)
-        proposal = repository.get_proposal(id)
+        proposal = repository.get_proposal(pid)
 
         if (proposal is None):
             return None
@@ -153,13 +155,13 @@ class ProposalService:
         if (user_data is None):
             return None
         
-        if id not in user_data["liked_proposals"]:
-            return False
+        if pid not in user_data["liked_proposals"]:
+            return None
 
-        user_data["liked_proposals"].remove(id)
+        user_data["liked_proposals"].remove(pid)
         proposal['likes'] -= 1
 
         repository.update_user(user, user_data)
-        repository.update_proposal(id, proposal)
+        repository.update_proposal(pid, proposal)
 
         return proposal['likes']

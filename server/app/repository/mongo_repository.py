@@ -52,8 +52,7 @@ class MongoRepository:
 
     def list_proposals_paged(self, start_value, items_per_page):
         if start_value is None:
-            proposals = self.proposals_collection.find().sort('_id',-1 ).limit(int(items_per_page))
-            start_value = proposals[0]['_id']
+            return self.proposals_collection.find().sort('_id',-1).limit(int(items_per_page))
         return self.proposals_collection.find({ '_id': { '$lt': ObjectId(start_value) } } ).sort('_id',-1).limit(int(items_per_page))
 
     def create_proposal(self, proposal):

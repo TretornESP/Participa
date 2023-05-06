@@ -75,6 +75,11 @@ class ProposalModel:
             data.pop('id')
         return data
 
+    def to_creation_dict(self):
+        data = self.to_dict()
+        data.pop('id')
+        return data
+
     def to_vo_dict(self):
         data = self.to_dict()
         data.pop('deleted_at')

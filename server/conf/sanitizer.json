@@ -35,24 +35,19 @@
                         "description": "name",
                         "pattern": "^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$"
                     },
-                    "surname": {
-                        "type": "string",
-                        "description": "name",
-                        "pattern": "^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$"
-                    },
                     "photo": {
                         "type": "string",
                         "description": "photo",
-                        "pattern": "^https://participasalvaterra.s3.eu-north-1.amazonaws.com/.*$"
+                        "pattern": "^[a-fA-F0-9]{24}\/[0-9]{10,30}\\.(png|jpg)$"
                     },
                     "password": {
                         "type": "string",
                         "description": "password",
                         "pattern": "^(?=.*[a-z]).{6,}$"
                     },
-                    "public": {
+                    "ispublic": {
                         "type": "boolean",
-                        "description": "public"
+                        "description": "ispublic"
                     }
                 },
                 "required": [
@@ -81,24 +76,19 @@
                         "description": "name",
                         "pattern": "^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$"
                     },
-                    "surname": {
-                        "type": "string",
-                        "description": "surname",
-                        "pattern": "^[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+(\\s*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]*)*[a-zA-ZÀ-ÿ\\u00f1\\u00d1]+$"
-                    },
                     "photo": {
                         "type": "string",
                         "description": "photo",
-                        "pattern": "^https://participasalvaterra.s3.eu-north-1.amazonaws.com/.*$"
+                        "pattern": "^[a-fA-F0-9]{24}\/[0-9]{10,30}\\.(png|jpg)$"
                     },
                     "password": {
                         "type": "string",
                         "description": "password",
                         "pattern": "^(?=.*[a-z]).{6,}$"
                     },
-                    "public": {
+                    "ispublic": {
                         "type": "boolean",
-                        "description": "public"
+                        "description": "ispublic"
                     }
                 },
                 "required": [
@@ -106,9 +96,8 @@
                     "photo",
                     "email",
                     "name",
-                    "surname",
                     "password",
-                    "public"
+                    "ispublic"
                 ],
                 "additionalProperties": false
             }
@@ -142,8 +131,7 @@
                 },
                 "additionalProperties": false,
                 "required": [
-                    "items",
-                    "start"
+                    "items"
                 ]
             }
         },
@@ -172,15 +160,15 @@
                         "description": "The photo ids",
                         "items": {
                             "type": "string",
-                            "pattern": "^https://participasalvaterra.s3.eu-north-1.amazonaws.com/.*$"
+                            "pattern": "^[a-fA-F0-9]{24}\/[0-9]{10,30}\\.(png|jpg)$"
                         },
-                        "minItems": 1,
-                        "maxItems": 6
+                        "minItems": 0,
+                        "maxItems": 3
                     },
                     "main_photo": {
                         "type": "string",
                         "description": "The main photo id",
-                        "pattern": "^https://participasalvaterra.s3.eu-north-1.amazonaws.com/.*$"
+                        "pattern": "^[a-fA-F0-9]{24}\/[0-9]{10,30}\\.(png|jpg)$"
                     },
                     "coordinates": {
                         "type": "object",
@@ -276,10 +264,15 @@
                             "description": "The photo ids",
                             "items": {
                                 "type": "string",
-                                "pattern": "^[0-9a-fA-F]{24}$"
+                                "pattern": "^[a-fA-F0-9]{24}\/[0-9]{10,30}\\.(png|jpg)$"
                             },
                             "minItems": 1,
                             "maxItems": 6
+                        },
+                        "main_photo": {
+                            "type": "string",
+                            "description": "The main photo id",
+                            "pattern": "^[a-fA-F0-9]{24}\/[0-9]{10,30}\\.(png|jpg)$"
                         }
                     },
                     "required": [

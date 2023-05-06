@@ -1,6 +1,7 @@
 from app.config import Config
 import boto3
 from app.controller.route_master import RouteMaster
+import logging
 
 class S3Repository:
     def __init__(self):
@@ -14,6 +15,9 @@ class S3Repository:
         )
         self.s3 = self.session.resource('s3')
         self.photo_bucket = self.config['photo_bucket']
+        logging.getLogger('boto3').setLevel(logging.WARNING)
+        logging.getLogger('botocore').setLevel(logging.WARNING)
+        logging.getLogger('nose').setLevel(logging.WARNING)        
         
     def download_file(self, key, filename):
         self.s3.Bucket(self.photo_bucket).download_file(key, filename)

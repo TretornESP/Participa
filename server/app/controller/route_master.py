@@ -169,6 +169,10 @@ class RouteMaster:
         return jsonify(message), 201
 
     @staticmethod
+    def precondition_missing_response(message):
+        return jsonify(message), 412
+
+    @staticmethod
     def unsafe_input_response(message):
         return jsonify(message), 422
 

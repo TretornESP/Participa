@@ -10,7 +10,7 @@ from flask_jwt_extended import (
     create_access_token, jwt_required, get_jwt_identity, create_refresh_token, get_jwt
 )
 
-bp = RouteMaster.add_route('security', origins = ['https://localhost'])
+bp = RouteMaster.add_route('security', origins = ['https://participasalvaterra.es'])
 
 @bp.route('/login', methods=['POST'])
 @jwt_required(optional=True)
@@ -58,18 +58,32 @@ def login():
 def validate_token():
     current_user_id = get_jwt_identity()
     user_id = get_jwt_identity()
-    user = UserService.getUser(user_id)
+    user = UserService.getUserById(user_id)
     if (user is None):
-        return RouteMaster.ok_response({"message": "Token is valid but user doesnt exist!", "user": current_user_id})
+        return RouteMaster.precondition_missing_response({"message": "Token is valid but user doesnt exist!", "user": current_user_id})
 
     return RouteMaster.ok_response({"message": "Token is valid", "user": current_user_id})
+
+@bp.route('/isVerified', methods=['GET'])
+@jwt_required()
+def is_verified():
+    current_user_id = get_jwt_identity()
+    user_id = get_jwt_identity()
+    user = UserService.getUserById(user_id)
+    if (user is None):
+        return RouteMaster.ok_response({"message": "Token is valid but user doesnt exist!", "user": current_user_id})
+    
+    if (user.get_verified() == True):
+        return RouteMaster.ok_response({"message": "User is verified", "user": current_user_id})
+    else:
+        return RouteMaster.precondition_missing_response({"message": "User is not verified", "user": current_user_id})
 
 @bp.route('/refreshToken', methods=['GET'])
 @jwt_required(refresh=True)
 def refresh_token():
     current_user_id = get_jwt_identity()
     user_id = get_jwt_identity()
-    user = UserService.getUser(user_id)
+    user = UserService.getUserById(user_id)
     if (user is None):
         return RouteMaster.unauthorized_response({"message": "Cant refresh token, user doesnt exist!"})
 

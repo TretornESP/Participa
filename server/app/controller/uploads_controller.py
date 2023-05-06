@@ -7,7 +7,7 @@ from .route_master import RouteMaster
 from app.service.uploads_service import UploadsService
 from app.config import Config
 
-bp = RouteMaster.add_route('uploads', origins = ['https://localhost'])
+bp = RouteMaster.add_route('uploads', origins = ['https://participasalvaterra.es'])
 
 @bp.route('/photo', methods=['POST'])
 @jwt_required()
@@ -31,7 +31,7 @@ def upload_photo():
         hostname = Config().toDict()['conf']['hostname']
         port = Config().toDict()['conf']['port']
 
-        return RouteMaster.created_response({'url': method + "://" + hostname + ":" + str(port) + "/uploads/photo/" + filename})
+        return RouteMaster.created_response({'url': filename})
 
 @bp.route('/photo/<folder>/<image>', methods=['GET'])
 @jwt_required()

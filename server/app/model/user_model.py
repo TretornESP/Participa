@@ -1,5 +1,5 @@
 class UserModel:
-    def __init__(self, uid, name, email, photo, dni, password_hash, password_salt, verified, public, created_at, deleted_at, liked_proposals):
+    def __init__(self, uid, name, email, photo, dni, password_hash, password_salt, verified, ispublic, created_at, deleted_at, liked_proposals):
         self.uid = uid
         self.name = name
         self.email = email
@@ -8,7 +8,7 @@ class UserModel:
         self.password_hash = password_hash
         self.password_salt = password_salt
         self.verified = verified
-        self.public = public
+        self.ispublic = ispublic
         self.created_at = created_at
         self.deleted_at = deleted_at
         self.liked_proposals = liked_proposals
@@ -26,7 +26,7 @@ class UserModel:
             source['password_hash'],
             source['password_salt'],
             source['verified'],
-            source['public'],
+            source['ispublic'],
             source['created_at'],
             source['deleted_at'],
             source['liked_proposals']
@@ -58,8 +58,8 @@ class UserModel:
     def get_verified(self):
         return self.verified
 
-    def get_public(self):
-        return self.public
+    def get_ispublic(self):
+        return self.ispublic
 
     def get_created_at(self):
         return self.created_at
@@ -80,11 +80,16 @@ class UserModel:
             'password_hash': self.password_hash,
             'password_salt': self.password_salt,
             'verified': self.verified,
-            'public': self.public,
+            'ispublic': self.ispublic,
             'created_at': self.created_at,
             'deleted_at': self.deleted_at,
             'liked_proposals': self.liked_proposals
         }
+
+    def to_creation_dict(self):
+        data = self.to_dict()
+        data.pop('uid')
+        return data
 
     def to_vo_dict(self):
         data = self.to_dict()
@@ -97,11 +102,11 @@ class UserModel:
         return data
 
     def to_external_vo_dict(self):
-        if self.public:
+        if self.ispublic:
             data = self.to_vo_dict()
             data.pop('email')
             data.pop('liked_proposals')
-            data.pop('public')
+            data.pop('ispublic')
             return data
         else:
             return {

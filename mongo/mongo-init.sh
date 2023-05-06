@@ -21,26 +21,26 @@ db.users.insertMany([
     "name": "xabi",
     "email": "xabi@xabi.com",
     "dni": 123123,
-    "photo": "https://tretornesp.com/cuak.jpg",
+    "photo": "6450443ab13b889314d2cd50/7592691030377231914.jpg",
     "password_hash" : "7791aab6b05036537893253f84f6c649f09b9d051649a8d22d545a52b66496a3",
     "password_salt" : "gimmesomepepper",
     "created_at": 1682974904,
     "deleted_at": 0,
     "verified": true,
-    "public": true,
+    "ispublic": true,
     "liked_proposals": []
   },
   {
     "name": "xabi2",
     "email": "xabi2@xabi.com",
     "dni": 123123,
-    "photo": "https://tretornesp.com/cuak.jpg",
+    "photo": "6450443ab13b889314d2cd50/7592691030377231914.jpg",
     "password_hash" : "7791aab6b05036537893253f84f6c649f09b9d051649a8d22d545a52b66496a3",
     "password_salt" : "gimmesomepepper",
     "verified": true,
     "created_at": 1682974904,
     "deleted_at": 0,
-    "public": false,
+    "ispublic": false,
     "liked_proposals": []
   }
 ])
@@ -54,10 +54,10 @@ db.proposals.insertMany([
     "title": "Arboles en la plaza",
     "description": "Me encantaria tener arboles en la plaza, son super bonitos y dan sombra",
     "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
+      "6450443ab13b889314d2cd50/7592691030377231914.jpg",
+      "6450443ab13b889314d2cd50/13107662245843457970.jpg"
     ],
-    "main_photo": "https://tretornesp.com/cuak.jpg",
+    "main_photo": "6450443ab13b889314d2cd50/7592691030377231914.jpg",
     "author": xabi._id,
     "created_at": 1673198346,
     "deleted_at": 0,
@@ -71,10 +71,10 @@ db.proposals.insertMany([
     "title": "Gimnasio",
     "description": "Querria un gimnasio en la plaza, para poder hacer deporte",
     "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
+      "6450443ab13b889314d2cd50/7592691030377231914.jpg",
+      "6450443ab13b889314d2cd50/13107662245843457970.jpg"
     ],
-    "main_photo": "https://tretornesp.com/cuak.jpg",
+    "main_photo": "6450443ab13b889314d2cd50/7592691030377231914.jpg",
     "author": xabi._id,
     "created_at": 1673199346,
     "deleted_at": 0,
@@ -88,10 +88,9 @@ db.proposals.insertMany([
     "title": "Rebeldia",
     "description": "Queremos abrir una delegación de rebeldía en la plaza, junto a la plaza de abastos",
     "photos": [
-      "https://tretornesp.com/cuak.jpg",
-      "https://tretornesp.com/cuak2.jpg"
+      "6450443ab13b889314d2cd50/7592691030377231914.jpg",
     ],
-    "main_photo": "https://tretornesp.com/cuak.jpg",
+    "main_photo": "6450443ab13b889314d2cd50/7592691030377231914.jpg",
     "author": xabi2._id,
     "created_at": 1673158346,
     "deleted_at": 0,

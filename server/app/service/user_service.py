@@ -20,6 +20,11 @@ class UserService:
     @staticmethod
     def updateUser(user, changes):
         repository = MongoRepository()
+        if (changes.get('password') is not None):
+            salt = CryptographyUtil.generate_salt()
+            changes['password_hash'] = CryptographyUtil.encrypt(changes['password'], salt)
+            changes['password_salt'] = salt
+            del changes['password']
         return UserModel.from_dict(repository.update_user(user, changes))
 
     @staticmethod
@@ -44,7 +49,7 @@ class UserService:
             'dni': user['dni'],
             'photo': user['photo'],
             'verified': False,
-            'public': user['public'],
+            'ispublic': user['ispublic'],
             'password_hash': CryptographyUtil.encrypt(user['password'], salt),
             'password_salt': salt,
             'created_at': int(time.time()),

@@ -6,7 +6,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from .route_master import RouteMaster
 from app.service.user_service import UserService
 
-bp = RouteMaster.add_route('user', origins = ['https://localhost'])
+bp = RouteMaster.add_route('user', origins = ['https://participasalvaterra.es'])
 
 @bp.route('/', methods=['GET'])
 @jwt_required()
@@ -17,12 +17,20 @@ def get_user():
          return RouteMaster.not_found_response({'message': 'User not found'})
      return RouteMaster.ok_response({'user': user.to_vo_dict()})
 
+@bp.route('/<uid>', methods=['GET'])
+@jwt_required()
+def get_user_by_id(uid):
+    user = UserService.getUserById(uid)
+    if (user is None):
+        return RouteMaster.not_found_response({'message': 'User not found'})
+    return RouteMaster.ok_response({'user': user.to_external_vo_dict()})
+
 @bp.route('/', methods=['PUT'])
 @jwt_required()
 @RouteMaster.filter_input
 def update_user():
     user_id = get_jwt_identity()
-    user = UserService.getUser(user_id)
+    user = UserService.getUserById(user_id)
     if (user is None):
         return RouteMaster.unauthorized_response({'message': 'User not found'})
 
@@ -48,7 +56,7 @@ def register_user():
 @jwt_required()
 def delete_user():
     user_id = get_jwt_identity()
-    user = UserService.getUser(user_id)
+    user = UserService.getUserById(user_id)
     if (user is None):
         return RouteMaster.unauthorized_response({'message': 'User not found'})
         

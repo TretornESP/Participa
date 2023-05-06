@@ -4,16 +4,17 @@ from flask import request, current_app
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from .route_master import RouteMaster
 from app.service.proposal_service import ProposalService
+from app.service.user_service import UserService
 from app.config import Config
 
-bp = RouteMaster.add_route('proposal', origins = ['https://localhost'])
+bp = RouteMaster.add_route('proposal', origins = ['https://participasalvaterra.es'])
 
 @bp.route('/', methods=['GET'])
 @jwt_required()
 @RouteMaster.filter_input
 def list_proposals():
     user_id = get_jwt_identity()
-    user = UserService.getUser(user_id)
+    user = UserService.getUserById(user_id)
     if (user is None):
         return RouteMaster.unauthorized_response({'message': 'User not found'})
 
@@ -28,6 +29,9 @@ def list_proposals():
         if (proposals is None or len(proposals) == 0):
             return RouteMaster.not_found_response({'message': 'Proposals not found'})
 
+        if end_value is None:
+            end_value = "-1"
+            
         return RouteMaster.ok_response({'proposals': proposals, 'end': end_value})
     else:
         proposals = ProposalService.listProposals()
@@ -43,7 +47,7 @@ def list_proposals():
 @RouteMaster.filter_input
 def get_proposal(id):
     user_id = get_jwt_identity()
-    user = UserService.getUser(user_id)
+    user = UserService.getUserById(user_id)
     if (user is None):
         return RouteMaster.unauthorized_response({'message': 'User not found'})
 
@@ -57,7 +61,7 @@ def get_proposal(id):
 @RouteMaster.filter_input
 def delete_proposal(id):
     user_id = get_jwt_identity()
-    user = UserService.getUser(user_id)
+    user = UserService.getUserById(user_id)
     if (user is None):
         return RouteMaster.unauthorized_response({'message': 'User not found'})
 
@@ -71,7 +75,7 @@ def delete_proposal(id):
 @RouteMaster.filter_input
 def create_proposal():
     user_id = get_jwt_identity()
-    user = UserService.getUser(user_id)
+    user = UserService.getUserById(user_id)
     if (user is None):
         return RouteMaster.unauthorized_response({'message': 'User not found'})
 
@@ -100,7 +104,7 @@ def create_proposal():
 @RouteMaster.filter_input
 def update_proposal(id):
     user_id = get_jwt_identity()
-    user = UserService.getUser(user_id)
+    user = UserService.getUserById(user_id)
     if (user is None):
         return RouteMaster.unauthorized_response({'message': 'User not found'})
 
@@ -126,7 +130,7 @@ def update_proposal(id):
 @RouteMaster.filter_input
 def like_proposal():
     user_id = get_jwt_identity()
-    user = UserService.getUser(user_id)
+    user = UserService.getUserById(user_id)
     if (user is None):
         return RouteMaster.unauthorized_response({'message': 'User not found'})
 
@@ -148,7 +152,7 @@ def like_proposal():
 @RouteMaster.filter_input
 def unlike_proposal():
     user_id = get_jwt_identity()
-    user = UserService.getUser(user_id)
+    user = UserService.getUserById(user_id)
     if (user is None):
         return RouteMaster.unauthorized_response({'message': 'User not found'})
         
@@ -160,7 +164,4 @@ def unlike_proposal():
     if (proposal is None):
         return RouteMaster.error_response({'message': 'Invalid id or user token'})
     
-    if (proposal == False):
-        return RouteMaster.error_response({'message': 'Cant dislike a proposal you didnt like'})
-
     return RouteMaster.ok_response({'likes': str(proposal)})
