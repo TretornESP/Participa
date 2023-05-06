@@ -21,6 +21,7 @@ def project_init():
         conf = app.myconfig['conf']
 
         app.jwt = JWTManager(app)
+        app.template_folder = app.myconfig["conf"]['static_folder']
         app.jwt_redis_blocklist = redis.StrictRedis(
             host=app.myconfig["conf"]["trashcan_hostname"],
             port=app.myconfig["conf"]["trashcan_port"],

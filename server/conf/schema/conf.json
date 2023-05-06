@@ -28,6 +28,14 @@
         "type": "string",
         "description": "The method for the API"
       },
+      "uploads_folder": {
+        "type": "string",
+        "description": "The folder for the uploads"
+      },
+      "static_folder": {
+        "type": "string",
+        "description": "The folder for the static files"
+      },
       "secret_key": {
         "type": "string",
         "description": "The secret key for the API"
@@ -70,6 +78,7 @@
       "method",
       "hostname",
       "port",
+      "static_folder",
       "trashcan_port",
       "trashcan_password",
       "trashcan_db",

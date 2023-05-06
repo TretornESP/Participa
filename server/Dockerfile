@@ -11,6 +11,7 @@ RUN mkdir -p /server/app
 # Copy app
 ADD app/* /server/app/
 ADD conf/* /server/conf/
+ADD static/* /server/static/
 COPY wsgi.py /server/wsgi.py
 COPY requirements.txt /server/requirements.txt
 
