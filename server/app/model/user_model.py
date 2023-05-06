@@ -112,5 +112,5 @@ class UserModel:
             return {
                 'uid': self.uid,
                 'name': 'Usuario Anónimo',
-                'photo': "http://tretornesp.com/photos/anonimo.png",
+                'photo': "https://participasalvaterra.es/photos/anonimo.png",
             }
