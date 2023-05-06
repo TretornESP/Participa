@@ -2,7 +2,7 @@
 set -e
 
 mongo <<EOF
-use participa
+use admin
 db.createUser(
   {
     user: "${MONGO_USER}",
